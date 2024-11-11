@@ -1,4 +1,4 @@
-class Indv():
+class Indv:
     blue_count = 0
     orange_count = 0
 
@@ -31,8 +31,10 @@ class Indv():
         elif phenotype == 'Orange':
             Indv.orange_count += 1
 
+    @classmethod
     def get_blue_count(cls):
         return cls.blue_count
+
+    @classmethod
     def get_orange_count(cls):
         return cls.orange_count
-
