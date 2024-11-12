@@ -44,18 +44,15 @@ def calculate_binomial_probability(n, k, p):
     return binom_coeff * (p ** k) * ((1 - p) ** (n - k))
 
 
-def write_results(output_file, n, k, probability, individuals):
+def write_results(output_file, n, k, probability, individuals, trait_frequency):
     '''Write the results to the specified output file.'''
     with open(output_file, 'w') as file:
-        file.write(f"Total number of individuals: {n}\n")
-        file.write(f"Number of individuals with orange phenotype: {k}\n")
-        file.write(f"Probability of observing {k} orange individuals given the frequency: {probability}\n")
-        file.write("\nList of individuals with the orange phenotype:\n")
-
-        for indv in individuals:
-            if indv.phenotype == 'Orange':
-                file.write(f"{indv.sample_id}, sequenced on {indv.date_of_seq}\n")
-
+        file.write("Results\n\n")
+        file.write(f"p (the frequency of \"orange\" in the population) = {trait_frequency}\n")
+        file.write(f"n (the number of sampled individuals) = {n}\n")
+        file.write(f"k (the number of \"orange\" individuals in the sample set) = {k}\n\n")
+        file.write(f"Probability of collecting {n} individuals with {k} being \"orange\" ")
+        file.write(f"(given a population frequency of {trait_frequency}) = {probability}\n")
 
 def main():
     # Retrieve command-line arguments
@@ -73,7 +70,9 @@ def main():
     probability = calculate_binomial_probability(n, k, trait_frequency)
 
     # Write results to the output file
-    write_results(output_file, n, k, probability, individuals)
+    write_results(output_file, n, k, probability, individuals, trait_frequency)
 
 
 # Run the script only if it's being executed as the main module
+if __name__ == "__main__":
+    main()
